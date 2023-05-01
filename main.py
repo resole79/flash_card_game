@@ -3,6 +3,7 @@ from tkinter import *
 from PIL import Image
 from random import choice
 
+# Declare variable and CONSTANT
 FILE = "./data/french_words.csv"
 LEARN_FILE = "./data/word_to_learn.csv"
 FRONT_IMAGE = "./images/card_front.png"
@@ -10,11 +11,13 @@ BACK_IMAGE = "./images/card_back.png"
 IMAGE_RIGHT = "./images/right.png"
 IMAGE_WRONG = "./images/wrong.png"
 BACKGROUND_COLOR = "#B1DDC6"
-
-open_image = Image.open(FRONT_IMAGE)
-width, height = open_image.size
 random_word = {}
 
+# Get size of image
+open_image = Image.open(FRONT_IMAGE)
+width, height = open_image.size
+
+# Create window object
 window = Tk()
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 window.title("Flash Card Game")
@@ -28,6 +31,7 @@ else:
     data_word_dict = data_word.to_dict(orient="records")
 
 
+# Function to get a new card
 def next_card():
     global random_word, flip_timer
 
@@ -42,6 +46,7 @@ def next_card():
     flip_timer = window.after(3000, flip_card)
 
 
+# Function to delete the card user knows
 def word_know():
     data_word_dict.remove(random_word)
     data_word_learn = pandas.DataFrame(data_word_dict)
@@ -50,6 +55,7 @@ def word_know():
     next_card()
 
 
+# Function to flip the card
 def flip_card():
     canvas_image.itemconfig(canvas_create_image, image=back_card_image)
     canvas_image.itemconfig(canvas_create_title, text="English", fill="white", font=("Arial", 40, "italic"))
@@ -58,6 +64,7 @@ def flip_card():
 
 flip_timer = window.after(3000, flip_card)
 
+# Create Canvas object
 canvas_image = Canvas(width=width, height=height, bg=BACKGROUND_COLOR, highlightthickness=0)
 front_card_image = PhotoImage(file=FRONT_IMAGE)
 
@@ -69,6 +76,7 @@ canvas_create_title = canvas_image.create_text(400, 150, fill="black", font=("Ar
 canvas_create_word = canvas_image.create_text(400, 263, fill="black", font=("Arial", 60, "bold"))
 canvas_image.grid(column=0, row=0, columnspan=2)
 
+# Create Button images
 right_image = PhotoImage(file=IMAGE_RIGHT)
 right_button = Button(image=right_image, highlightthickness=0, command=word_know)
 right_button.grid(column=1, row=1)
