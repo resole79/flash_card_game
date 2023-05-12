@@ -12,7 +12,7 @@ Each flashcard bears a question on one side and an answer on the other.
 
 
 #### Prerequisites
-You will need the following software to run the Pomodoro Timer:
+You will need the following software to run the Flash Card Game:
  - [Python 3](https://www.python.org/downloads/)
  - [pandas](https://pandas.pydata.org/docs/getting_started/install.html#installing-from-pypi)
 
